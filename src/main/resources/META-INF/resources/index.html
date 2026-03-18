@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 4단계: 애니메이션 및 시각 효과 추가 */
+.card {
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+transform: scale(1.05); /* 마우스를 올리면 커짐 */
+box-shadow: 0 10px 20px rgba(160, 32, 240, 0.5); /* 보라색 광원 효과 */
+}
+.card-img-top {
+height: 200px;
+object-fit: cover; /* 이미지가 찌그러지지 않게 채움 */
+}
+    body { background-color: #0a0e17; color: #fff; }
+    .accent-purple { color: #a020f0; }
+    .card { background-color: #1e1e1e; border: none; color: white; }
+    .btn-primary { background-color: #a020f0; border: none; }
+    </style>
+<h2 class="text-center accent-purple">챔피언 선택</h2>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container-fluid"><a class="navbar-brand" href="#">League of Legends</a></div>
+</nav>
+<div class="container my-5">
+<div class="row">
+<div class="col-md-4">
+<div class="card">
+<img src="https://ddragon.leagueoflegends.com/cdn/15.24.1/img/champion/Aatrox.png" class="card-img-top">
+<div class="card-body">
+<h5>Aatrox</h5>
+<p>어둠의 검으로 적을 베세요.</p>
+</div>
+<h2 class="text-center accent-purple">챔피언 선택</h2>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
