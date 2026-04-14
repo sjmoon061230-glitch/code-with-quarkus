@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>League of Legends - 메인 페이지</title>
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 CDN --> 
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+     <script>
+window.onload = function() 
+{
+alert("메인 페이지 로딩 완료");
+}
+</script>
+
     <!-- 커스텀 스타일 (LOL 테마 + 챔피언 호버 효과) -->
     <style>
         body { background-color: #0a0e17; color: #fff; font-family: 'Arial', sans-serif; }
@@ -77,10 +84,10 @@
         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+<form class="d-flex" id="searchForm">
+<input class="form-control me-2" type="search" placeholder="챔피언, 뉴스검색..."aria-label="Search" id="searchInput">
+<button class="btn btn-outline-success" type="submit">검색하기</button>
+</form>
   </div>
 </div>
 </nav>
@@ -227,6 +234,46 @@ allowfullscreen>
             </div>
         </div>
     </section>
-    
+
+<!--===== 검색결과섹션(기본숨김) ===== -->
+<section id="searchResults">
+<!--키워드헤더-->
+<div class="search-keyword-header">
+<h1 id="searchKeywordDisplay"></h1>
+</div>
+<!--본문: 사이드바+ 콘텐츠-->
+<div class="search-body">
+<div class="container-fluid px-0">
+<div class="row g-0">
+<!--왼쪽카테고리사이드바-->
+<div class="col-md-3 col-lg-2 search-sidebar bg-white py-4">
+<div class="px-3 mb-3" style="font-size:0.8rem; color:#999; text-transform:uppercase; letter-spacing:0.1em;">카테고리</div>
+<div class="search-category-item active" onclick="switchCategory('champion', this)">
+챔피언<span class="count" id="champCount">(0)</span>
+</div>
+    <div class="search-category-item" onclick="switchCategory('news', this)">
+뉴스<span class="count" id="newsCount">(0)</span>
+</div>
+</div>
+<!--오른쪽콘텐츠-->
+<div class="col-md-9 col-lg-10 search-content-area">
+<!--챔피언결과-->
+<div id="resultChampion">
+<h5 class="mb-4" style="color:#333;">챔피언</h5>
+<div id="championResultList"></div>
+</div>
+<!--뉴스결과-->
+<div id="resultNews" style="display:none;">
+<h5 class="mb-4" style="color:#333;">뉴스</h5>
+<div id="newsResultList"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+    <script src="js/serch.js"></script>
+
 </body>
 </html>
