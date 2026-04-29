@@ -13,8 +13,11 @@ window.onload = function()
 {
 alert("메인 페이지 로딩 완료");
 }
-</script>
 
+
+
+</script>
+<script src="bootstrap.bundle.js"></script>
     <!-- 커스텀 스타일 (LOL 테마 + 챔피언 호버 효과) -->
     <style>
         body { background-color: #0a0e17; color: #fff; font-family: 'Arial', sans-serif; }
@@ -52,7 +55,11 @@ alert("메인 페이지 로딩 완료");
     </nav> -->
     <nav class="navbar navbar-expand-lg navbar-light" data-bs-theme="dark">
 <div class="container-fluid">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <img src="/image/lol.jpg" alt=""width="30" height="24">
+<!-- [변경] "Navbar" 텍스트 → 다크/라이트 토글 버튼-->
+<button class="btn border-0" id="themeToggleBtn" onclick="toggleTheme()">
+DARK
+</button>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -275,6 +282,7 @@ allowfullscreen>
 </section>
 
     <script src="js/serch.js"></script>
+    
 
 </body>
 </html>
