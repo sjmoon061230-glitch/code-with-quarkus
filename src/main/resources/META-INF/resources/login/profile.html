@@ -1,0 +1,158 @@
+<!– 기존 로그인 등 페이지의 디자인을 재활용한다. -->
+<section class="hero d-flex align-items-center
+justify-content-center text-center py-5">
+<div class="container" style="max-width: 500px;">
+<h2 class="fw-bold mb-4"> 내 프로필</h2>
+<!-- 프로필 사진 영역 -->
+<div class="mb-4">
+<img id="profileImg"
+src="/uploads/profile/default.png"
+class="rounded-circle"
+width="120" height="120"
+style="object-fit:cover; border:3px solid #fff;"
+alt="프로필 사진">
+</div>
+<!-- 개인 정보 출력 -->
+<div class="card bg-dark text-white border-secondary mb-4">
+<div class="card-body text-start">
+<table class="table table-dark table-bordered mb-0">
+<tr>
+<th style="width:30%">아이디</th>
+<td id="infoUsername"></td>
+</tr>
+<tr>
+<th>이메일</th>
+<td id="infoEmail"></td>
+</tr>
+<tr>
+<th>연락처</th>
+<td id="infoPhone"></td>
+</tr>
+</table>
+</div>
+</div>
+<!-- 사진 업로드 폼 -->
+<form id="uploadForm"
+method="POST"
+action="/profile/upload"
+enctype="multipart/form-data">
+<div class="mb-3">
+
+    <label class="form-label">프로필 사진 변경</label>
+<input type="file"
+class="form-control"
+id="profileFile"
+name="profileImage"
+accept="image/jpeg,image/png,image/gif,image/webp">
+<div class="form-text text-muted">
+jpg, png, gif, webp / 최대 5MB
+</div>
+</div>
+<button type="submit"
+class="btn btn-primary w-100">
+사진 업로드
+</button>
+</form>
+</div>
+</section>
+<!-- JS 연동 -->
+<script src="../js/search.js"></script>
+<script src="../js/toggle.js"></script>
+
+window.onload = function() {
+fetch('/profile/info’) // 서버에서 사용자 정보 요청, 비동기 i/o
+.then(res => res.json()) // json 파싱
+.then(data => {
+document.getElementById('infoUsername').textContent
+= data.username; // DOM 조작 방지
+document.getElementById('infoEmail').textContent
+= data.email;
+document.getElementById('infoPhone').textContent
+= data.phone;
+if (data.profileImage) { // null 체크
+document.getElementById('profileImg').src
+= '/uploads/profile/' + data.profileImage;
+}
+});
+}
+
+<!-- 사진 업로드 폼 아래에 추가 -->
+<hr class="my-4">
+<!-- 토글 버튼 -->
+<button class="btn btn-warning w-100 mb-2"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#updateFormArea"
+aria-expanded="false">
+개인정보 수정
+</button>
+<!-- 기본 숨김 → 버튼 클릭 시 펼쳐짐 -->
+<div class="collapse" id="updateFormArea">
+<div class="card card-body bg-dark
+text-white border-secondary mt-2">
+<!-- 수정 결과 메시지 -->
+<div id="updateMsg" class="alert d-none mb-3"></div>
+<form id="updateForm"
+method="POST"
+action="/profile/update">
+<div class="mb-3 text-start">
+<label class="form-label">이메일</label>
+<input type="text" class="form-control"
+id="updateEmail" name="email"
+placeholder="example@email.com">
+<div class="invalid-feedback" id="updateEmailMsg"></div>
+</div>
+
+<div class="mb-3 text-start">
+<label class="form-label">연락처</label>
+<input type="text" class="form-control"
+id="updatePhone" name="phone"
+placeholder="010-0000-0000">
+<div class="invalid-feedback" id="updatePhoneMsg"></div>
+</div>
+<button type="button"
+class="btn btn-warning w-100"
+onclick="validateAndUpdate()">
+</button>
+</form>
+</div>
+</div>
+
+<!-- 개인정보 수정 폼 아래에 추가 -->
+<hr class="my-4">
+<h5 class="fw-bold mb-3"> 비밀번호 변경</h5>
+<!-- 결과 메시지 -->
+<div id="pwMsg" class="alert d-none mb-3"></div>
+<form id="pwForm"
+method="POST"
+action="/profile/password">
+<div class="mb-3 text-start">
+<label class="form-label">현재 비밀번호</label>
+<!-- 입력용 (서버 전송 안 됨) -->
+<input type="password" class="form-control"
+id="currentPwInput"
+placeholder="현재 비밀번호 입력" required>
+<div class="invalid-feedback" id="currentPwMsg"></div>
+<!-- 해시값 전송용 hidden -->
+<input type="hidden" id="currentPassword"
+name="currentPassword">
+</div>
+<div class="mb-3 text-start">
+<label class="form-label">새 비밀번호</label>
+<input type="password" class="form-control"
+id="newPwInput"
+placeholder="8자 이상, 영문+숫자+특수문자" required>
+<div class="invalid-feedback" id="newPwMsg"></div>
+<input type="hidden" id="newPassword"
+name="newPassword">
+</div>
+
+<!-- Toast 컨테이너 추가 -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+<div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert">
+<div class="d-flex">
+<div class="toast-body" id="toastBody">메시지</div>
+<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+</div>
+</div>
+</div>
